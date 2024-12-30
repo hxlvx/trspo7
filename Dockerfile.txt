@@ -1,0 +1,18 @@
+# Використовуємо офіційний образ Python
+FROM python:3.9-slim
+
+# Встановлюємо необхідні пакети
+RUN apt-get update && apt-get install -y python3-pip
+
+# Створюємо робочу директорію
+WORKDIR /app
+
+# Копіюємо файли проекту до контейнера
+COPY server.py /app/server.py
+COPY requirements.txt /app/requirements.txt
+
+# Встановлюємо залежності (якщо є)
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Запускаємо сервер
+CMD ["python", "server.py"]
